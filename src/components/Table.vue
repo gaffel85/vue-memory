@@ -53,13 +53,15 @@ import SizeButton from "./SizeButton.vue";
 import ScoreButton from "./ScoreButton.vue";
 import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
-const cardsData = require("../assets/birsd.json");
 
 const uri = window.location.search.substring(1);
 const params = new URLSearchParams(uri);
 const seed = params.get("seed");
 const screen = params.get("screen");
 const totalScreens = params.get("of");
+const memory = params.get("memory");
+
+const cardsData = require("../assets/" + memory + ".json");
 
 const gameState = new GameState();
 const random = new RndGen(seed);
@@ -89,14 +91,18 @@ const dividedPairs = cardsData
     }
   })
   .map(card => {
-    let pic = card.img;
-    if (!card.img.startsWith("http")) {
-      pic = "" + pic;
+    if (card.img) {
+      let pic = card.img;
+      if (!card.img.startsWith("http")) {
+        pic = "" + pic;
+      }
+      return {
+        ...card,
+        img: pic
+      };
+    } else {
+      return card;
     }
-    return {
-      ...card,
-      img: pic
-    };
   });
 
 const shuffledCards = shuffle(dividedPairs, random);
