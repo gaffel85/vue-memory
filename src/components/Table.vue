@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Settings :gameState="gameState" />
     <div class="controlls">
       <TakeButton :gameState="gameState" />
       <SizeButton :gameState="gameState" v-bind:inc="true" />
@@ -51,20 +52,20 @@ import Card from "./Card.vue";
 import TakeButton from "./TakeButton.vue";
 import SizeButton from "./SizeButton.vue";
 import ScoreButton from "./ScoreButton.vue";
+import Settings from "./Settings.vue";
 import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
 
 const uri = window.location.search.substring(1);
 const params = new URLSearchParams(uri);
-const seed = params.get("seed");
+/* const seed = params.get("seed");
 const screen = params.get("screen");
-const totalScreens = params.get("of");
+const totalScreens = params.get("of");*/
 const memory = params.get("memory");
 
 const cardsData = require("../assets/" + memory + ".json");
 
 const gameState = new GameState();
-const random = new RndGen(seed);
 
 const dividedPairs = cardsData
   .flatMap(card => {
@@ -83,9 +84,9 @@ const dividedPairs = cardsData
         }
       ];
     } else {
-      return card.pairs.map(pair => ({
+      return card.pairs.map((pair, index) => ({
         title,
-        key: title + pair.subtitle,
+        key: title + index,
         ...pair
       }));
     }
@@ -105,24 +106,14 @@ const dividedPairs = cardsData
     }
   });
 
-const shuffledCards = shuffle(dividedPairs, random);
-console.log(shuffledCards.map(i => i.title));
-
-const cardsPerScreen = Math.round(shuffledCards.length / totalScreens);
-const startCard = cardsPerScreen * (screen - 1);
-const endCard = startCard + cardsPerScreen;
-const cardsForThisPage = shuffledCards.slice(startCard, endCard);
-console.log("Sliced");
-console.log(cardsForThisPage);
-
 const namesHidden = screen ? screen != 1 : false;
-console.log(namesHidden);
 
 export default {
   name: "app",
   data: function() {
     return {
-      items: cardsForThisPage,
+      totalItems: dividedPairs,
+      items: [],
       gameState,
       namesHidden: namesHidden
     };
@@ -131,7 +122,23 @@ export default {
     Card,
     TakeButton,
     SizeButton,
-    ScoreButton
+    ScoreButton,
+    Settings
+  },
+  created: function() {
+    this.gameState.bindSettings((seed, screen, totalScreens) => {
+      const random = new RndGen(seed);
+      const shuffledCards = shuffle(dividedPairs, random);
+      console.log(shuffledCards.map(i => i.title));
+
+      const cardsPerScreen = Math.round(this.totalItems.length / totalScreens);
+      const startCard = cardsPerScreen * (screen - 1);
+      const endCard = startCard + cardsPerScreen;
+      const cardsForThisPage = this.totalItems.slice(startCard, endCard);
+      console.log("Sliced");
+      console.log(cardsForThisPage);
+      this.items = cardsForThisPage;
+    });
   }
 };
 </script>

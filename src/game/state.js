@@ -4,6 +4,21 @@ export class GameState {
     this.width = 200;
     this.sizeCallbacks = [];
     this.scores = new Map();
+    this.screenNbr = 1;
+    this.totalScreens = 1;
+    this.seed = 2139;
+    this.settingsCallback = () => {};
+  }
+
+  setOptions(seed, screenNbr, screenTotal) {
+    this.screenNbr = seed;
+    this.totalScreens = screenNbr;
+    this.seed = screenTotal;
+    this.settingsCallback(seed, screenNbr, screenTotal);
+  }
+
+  bindSettings(callback) {
+    this.settingsCallback = callback;
   }
 
   openCnt() {
