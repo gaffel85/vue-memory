@@ -4,6 +4,10 @@
       <TakeButton :gameState="gameState" />
       <SizeButton :gameState="gameState" v-bind:inc="true" />
       <SizeButton :gameState="gameState" v-bind:inc="false" />
+      <ScoreButton :gameState="gameState" userName="Ola" userId="1" />
+      <ScoreButton :gameState="gameState" userName="Julia" userId="2" />
+      <ScoreButton :gameState="gameState" userName="Hans" userId="3" />
+      <ScoreButton :gameState="gameState" userName="Ingeborg" userId="4" />
     </div>
     <div class="table">
       <Card
@@ -22,6 +26,7 @@
 import Card from "./Card.vue";
 import TakeButton from "./TakeButton.vue";
 import SizeButton from "./SizeButton.vue";
+import ScoreButton from "./ScoreButton.vue";
 import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
 const cardsData = require("../assets/birsd.json");
@@ -67,7 +72,8 @@ export default {
   components: {
     Card,
     TakeButton,
-    SizeButton
+    SizeButton,
+    ScoreButton
   }
 };
 </script>

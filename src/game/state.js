@@ -3,6 +3,7 @@ export class GameState {
     this.currentOpen = new Map();
     this.width = 200;
     this.sizeCallbacks = [];
+    this.scores = new Map();
   }
 
   openCnt() {
@@ -49,5 +50,23 @@ export class GameState {
   decSize() {
     this.width -= 10;
     this.callSizeCallbacks();
+  }
+
+  addScore(userId) {
+    let oldScore = this.scores.get(userId);
+    if (oldScore) {
+      this.scores.set(userId, oldScore + 1);
+    } else {
+      this.scores.set(userId, 1);
+    }
+  }
+
+  getScore(userId) {
+    this.takeOpenCards();
+    let score = this.scores.get(userId);
+    if (score) {
+      return score;
+    }
+    return 0;
   }
 }
