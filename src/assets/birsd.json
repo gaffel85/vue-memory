@@ -1,14 +1,23 @@
 [
   {
     "title": "Röd Ara",
-    "img": "https://images.squarespace-cdn.com/content/v1/57f0c3a629687faa60f2aa57/1530539021912-JHOUAVMQZ0K3PWXQJ1IP/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Ola+Gawell+-+20171020_1037_3922.jpg?format=750w"
+    "pairs": [
+      {
+        "img": "svenska-djur/utter.png"
+      }
+    ]
   },
   {
-    "title": "Tornuggla",
-    "img": "https://images.squarespace-cdn.com/content/v1/57f0c3a629687faa60f2aa57/1530539021912-JHOUAVMQZ0K3PWXQJ1IP/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Ola+Gawell+-+20171020_1037_3922.jpg?format=750w"
-  },
-  {
-    "title": "Kalkon",
-    "img": "https://images.squarespace-cdn.com/content/v1/57f0c3a629687faa60f2aa57/1530539021912-JHOUAVMQZ0K3PWXQJ1IP/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/Ola+Gawell+-+20171020_1037_3922.jpg?format=750w"
+    "title": "Tornuggle",
+    "pairs": [
+      {
+        "subtitle": "Hane",
+        "img": "svenska-djur/utter.png"
+      },
+      {
+        "subtitle": "Hona",
+        "img": "svenska-djur/utter.png"
+      }
+    ]
   }
 ]

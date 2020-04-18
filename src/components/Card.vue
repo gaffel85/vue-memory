@@ -1,13 +1,14 @@
 <template>
-  <div class="card">
-    <div
-      class="card-inner"
-      v-bind:class="[isClickedState ? 'isClicked' : '']"
-      @click="toggleClicked()"
-    >
+  <div
+    class="card"
+    v-bind:class="[isHidden ? 'hidden' : '']"
+    v-bind:style="{ width: cardWidth + 'px', height: cardHeight + 'px' }"
+  >
+    <div class="card-inner" v-bind:class="[isOpen ? 'isClicked' : '']" @click="toggleClicked()">
       <div class="card-front"></div>
       <div class="card-back">
         <h3>{{ title }}</h3>
+        <h4>{{ subtitle }}</h4>
         <img :src="pic" class="card-img" />
       </div>
     </div>
@@ -19,18 +20,40 @@ export default {
   name: "Card",
   props: {
     title: String,
-    pic: String
+    subtitle: String,
+    pic: String,
+    gameState: Object
   },
   data: function() {
     return {
-      isClickedState: false
+      isOpen: false,
+      isHidden: false,
+      cardWidth: 200,
+      cardHeight: 250
     };
+  },
+
+  created: function() {
+    this.gameState.bindSize(size => {
+      this.cardWidth = size;
+      this.cardHeight = (size * 250) / 200;
+    });
   },
 
   methods: {
     toggleClicked: function() {
-      console.log("clickinggg");
-      this.isClickedState = !this.isClickedState;
+      if (this.isOpen) {
+        this.gameState.close(this.title);
+        this.isOpen = false;
+      } else {
+        if (
+          this.gameState.open(this.title, () => {
+            this.isHidden = true;
+          })
+        ) {
+          this.isOpen = true;
+        }
+      }
     }
   }
 };
@@ -48,9 +71,12 @@ h3 {
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .card {
   background-color: transparent;
-  width: 200px;
   height: 250px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.card.hidden {
+  visibility: hidden;
 }
 
 /* This container is needed to position the front and back side */
