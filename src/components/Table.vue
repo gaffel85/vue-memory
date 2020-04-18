@@ -91,7 +91,7 @@ const dividedPairs = cardsData
   .map(card => {
     let pic = card.img;
     if (!card.img.startsWith("http")) {
-      pic = "/" + pic;
+      pic = "" + pic;
     }
     return {
       ...card,
