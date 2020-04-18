@@ -34,29 +34,41 @@ const cardsData = require("../assets/birsd.json");
 const gameState = new GameState();
 const random = new RndGen(388);
 
-const dividedPairs = cardsData.flatMap(card => {
-  const title = card.title;
-  if (card.pairs.length == 1) {
-    return [
-      {
+const dividedPairs = cardsData
+  .flatMap(card => {
+    const title = card.title;
+    if (card.pairs.length == 1) {
+      return [
+        {
+          title,
+          key: title + "1",
+          ...card.pairs[0]
+        },
+        {
+          title,
+          key: title + "2",
+          ...card.pairs[0]
+        }
+      ];
+    } else {
+      return card.pairs.map(pair => ({
         title,
-        key: title + "1",
-        ...card.pairs[0]
-      },
-      {
-        title,
-        key: title + "2",
-        ...card.pairs[0]
-      }
-    ];
-  } else {
-    return card.pairs.map(pair => ({
-      title,
-      key: title + pair.subtitle,
-      ...pair
-    }));
-  }
-});
+        key: title + pair.subtitle,
+        ...pair
+      }));
+    }
+  })
+  .map(card => {
+    let pic = card.img;
+    if (!card.img.startsWith("http")) {
+      pic = "@/assets/" + pic;
+    }
+    console.log(pic);
+    return {
+      ...card,
+      img: pic
+    };
+  });
 
 const shuffledData = shuffle(dividedPairs, random);
 console.log(shuffledData.map(i => i.title));
