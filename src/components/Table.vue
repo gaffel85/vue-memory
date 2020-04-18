@@ -4,10 +4,34 @@
       <TakeButton :gameState="gameState" />
       <SizeButton :gameState="gameState" v-bind:inc="true" />
       <SizeButton :gameState="gameState" v-bind:inc="false" />
-      <ScoreButton :gameState="gameState" userName="Ola" userId="1" />
-      <ScoreButton :gameState="gameState" userName="Julia" userId="2" />
-      <ScoreButton :gameState="gameState" userName="Hans" userId="3" />
-      <ScoreButton :gameState="gameState" userName="Ingeborg" userId="4" />
+      <ScoreButton
+        :gameState="gameState"
+        userName="Ola"
+        userId="1"
+        class="scorButton"
+        v-bind:class="[namesHidden ? 'hidden' : '']"
+      />
+      <ScoreButton
+        :gameState="gameState"
+        userName="Julia"
+        userId="2"
+        class="scorButton"
+        v-bind:class="[namesHidden ? 'hidden' : '']"
+      />
+      <ScoreButton
+        :gameState="gameState"
+        userName="Hans"
+        userId="3"
+        class="scorButton"
+        v-bind:class="[namesHidden ? 'hidden' : '']"
+      />
+      <ScoreButton
+        :gameState="gameState"
+        userName="Ingeborg"
+        userId="4"
+        class="scorButton"
+        v-bind:class="[namesHidden ? 'hidden' : '']"
+      />
     </div>
     <div class="table">
       <Card
@@ -31,8 +55,14 @@ import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
 const cardsData = require("../assets/birsd.json");
 
+const uri = window.location.search.substring(1);
+const params = new URLSearchParams(uri);
+const seed = params.get("seed");
+const screen = params.get("screen");
+const totalScreens = params.get("of");
+
 const gameState = new GameState();
-const random = new RndGen(388);
+const random = new RndGen(seed);
 
 const dividedPairs = cardsData
   .flatMap(card => {
@@ -61,24 +91,34 @@ const dividedPairs = cardsData
   .map(card => {
     let pic = card.img;
     if (!card.img.startsWith("http")) {
-      pic = "@/assets/" + pic;
+      pic = "/" + pic;
     }
-    console.log(pic);
     return {
       ...card,
       img: pic
     };
   });
 
-const shuffledData = shuffle(dividedPairs, random);
-console.log(shuffledData.map(i => i.title));
+const shuffledCards = shuffle(dividedPairs, random);
+console.log(shuffledCards.map(i => i.title));
+
+const cardsPerScreen = Math.round(shuffledCards.length / totalScreens);
+const startCard = cardsPerScreen * (screen - 1);
+const endCard = startCard + cardsPerScreen;
+const cardsForThisPage = shuffledCards.slice(startCard, endCard);
+console.log("Sliced");
+console.log(cardsForThisPage);
+
+const namesHidden = screen ? screen != 1 : false;
+console.log(namesHidden);
 
 export default {
   name: "app",
   data: function() {
     return {
-      items: shuffledData,
-      gameState
+      items: cardsForThisPage,
+      gameState,
+      namesHidden: namesHidden
     };
   },
   components: {
@@ -110,5 +150,8 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: auto;
+}
+.scorButton.hidden {
+  visibility: hidden;
 }
 </style>
