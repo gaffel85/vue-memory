@@ -1,6 +1,10 @@
 <template>
   <div class="card">
-    <div class="card-inner">
+    <div
+      class="card-inner"
+      v-bind:class="[isClickedState ? 'isClicked' : '']"
+      @click="toggleClicked()"
+    >
       <div class="card-front"></div>
       <div class="card-back">
         <h3>{{ title }}</h3>
@@ -16,6 +20,18 @@ export default {
   props: {
     title: String,
     pic: String
+  },
+  data: function() {
+    return {
+      isClickedState: false
+    };
+  },
+
+  methods: {
+    toggleClicked: function() {
+      console.log("clickinggg");
+      this.isClickedState = !this.isClickedState;
+    }
   }
 };
 </script>
@@ -48,7 +64,7 @@ h3 {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.card:hover .card-inner {
+.card-inner.isClicked {
   transform: rotateY(180deg);
 }
 
