@@ -7,14 +7,16 @@ export class GameState {
     this.screenNbr = 1;
     this.totalScreens = 1;
     this.seed = 2139;
+    this.memorySet = "letters";
     this.settingsCallback = () => {};
   }
 
-  setOptions(seed, screenNbr, screenTotal) {
+  setOptions(seed, screenNbr, screenTotal, memorySet) {
     this.screenNbr = seed;
     this.totalScreens = screenNbr;
     this.seed = screenTotal;
-    this.settingsCallback(seed, screenNbr, screenTotal);
+    this.memorySet = memorySet;
+    this.settingsCallback(seed, screenNbr, screenTotal, memorySet);
   }
 
   bindSettings(callback) {

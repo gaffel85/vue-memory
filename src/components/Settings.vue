@@ -10,6 +10,12 @@
         <input type="text" v-model="screenNumber" /> of
         <input type="text" v-model="screenTotal" />
       </div>
+      <div>
+        <select v-model="memorySet">
+          <option value="svenska-djur">Svenska djur</option>
+          <option value="letters">Bokstäver</option>
+        </select>
+      </div>
       <button @click.prevent="doneClicked()">Done</button>
     </form>
   </div>
@@ -26,9 +32,10 @@ export default {
       screen: 1,
       totalScreens: 3,
       isHidden: false,
-      seed: "",
+      seed: "" + Math.round(Math.random() * 10000),
       screenNumber: "",
-      screenTotal: ""
+      screenTotal: "",
+      memorySet: "letters"
     };
   },
 
@@ -42,7 +49,7 @@ export default {
       const seed = parseInt(this.seed);
       const screen = parseInt(this.screenNumber);
       const totalScreens = parseInt(this.screenTotal);
-      this.gameState.setOptions(seed, screen, totalScreens);
+      this.gameState.setOptions(seed, screen, totalScreens, this.memorySet);
     }
   }
 };
@@ -54,8 +61,24 @@ export default {
   height: 100vh;
   position: absolute;
   background: #dad9d8;
+  font-size: 18pt;
+  font-weight: bold;
 }
 .settings-panel.hidden {
   visibility: hidden;
+}
+input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  font-size: 20pt;
+  box-sizing: border-box;
+}
+select {
+  padding: 16px 20px;
+  font-size: 20pt;
+}
+button {
+  font-size: 20pt;
+  margin: 20px;
 }
 </style>

@@ -56,55 +56,14 @@ import Settings from "./Settings.vue";
 import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
 
-const uri = window.location.search.substring(1);
-const params = new URLSearchParams(uri);
+// const uri = window.location.search.substring(1);
+// const params = new URLSearchParams(uri);
 /* const seed = params.get("seed");
 const screen = params.get("screen");
 const totalScreens = params.get("of");*/
-const memory = params.get("memory");
-
-const cardsData = require("../assets/" + memory + ".json");
+// const memory = params.get("memory");
 
 const gameState = new GameState();
-
-const dividedPairs = cardsData
-  .flatMap(card => {
-    const title = card.title;
-    if (card.pairs.length == 1) {
-      return [
-        {
-          title,
-          key: title + "1",
-          ...card.pairs[0]
-        },
-        {
-          title,
-          key: title + "2",
-          ...card.pairs[0]
-        }
-      ];
-    } else {
-      return card.pairs.map((pair, index) => ({
-        title,
-        key: title + index,
-        ...pair
-      }));
-    }
-  })
-  .map(card => {
-    if (card.img) {
-      let pic = card.img;
-      if (!card.img.startsWith("http")) {
-        pic = "" + pic;
-      }
-      return {
-        ...card,
-        img: pic
-      };
-    } else {
-      return card;
-    }
-  });
 
 const namesHidden = screen ? screen != 1 : false;
 
@@ -112,7 +71,7 @@ export default {
   name: "app",
   data: function() {
     return {
-      totalItems: dividedPairs,
+      totalItems: [],
       items: [],
       gameState,
       namesHidden: namesHidden
@@ -126,15 +85,56 @@ export default {
     Settings
   },
   created: function() {
-    this.gameState.bindSettings((seed, screen, totalScreens) => {
+    this.gameState.bindSettings((seed, screen, totalScreens, memorySet) => {
+      const cardsData = require("../assets/" + memorySet + ".json");
+
+      const dividedPairs = cardsData
+        .flatMap(card => {
+          const title = card.title;
+          if (card.pairs.length == 1) {
+            return [
+              {
+                title,
+                key: title + "1",
+                ...card.pairs[0]
+              },
+              {
+                title,
+                key: title + "2",
+                ...card.pairs[0]
+              }
+            ];
+          } else {
+            return card.pairs.map((pair, index) => ({
+              title,
+              key: title + index,
+              ...pair
+            }));
+          }
+        })
+        .map(card => {
+          if (card.img) {
+            let pic = card.img;
+            if (!card.img.startsWith("http")) {
+              pic = "" + pic;
+            }
+            return {
+              ...card,
+              img: pic
+            };
+          } else {
+            return card;
+          }
+        });
+
       const random = new RndGen(seed);
       const shuffledCards = shuffle(dividedPairs, random);
       console.log(shuffledCards.map(i => i.title));
 
-      const cardsPerScreen = Math.round(this.totalItems.length / totalScreens);
+      const cardsPerScreen = Math.round(dividedPairs.length / totalScreens);
       const startCard = cardsPerScreen * (screen - 1);
       const endCard = startCard + cardsPerScreen;
-      const cardsForThisPage = this.totalItems.slice(startCard, endCard);
+      const cardsForThisPage = dividedPairs.slice(startCard, endCard);
       console.log("Sliced");
       console.log(cardsForThisPage);
       this.items = cardsForThisPage;
