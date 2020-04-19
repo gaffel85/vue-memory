@@ -28,7 +28,7 @@ export default {
     return {
       isOpen: false,
       isHidden: false,
-      cardWidth: 200,
+      cardWidth: 250,
       cardHeight: 250,
       noImg: !this.pic
     };
@@ -37,7 +37,7 @@ export default {
   created: function() {
     this.gameState.bindSize(size => {
       this.cardWidth = size;
-      this.cardHeight = (size * 250) / 200;
+      this.cardHeight = (size * 250) / 250;
     });
   },
 
@@ -70,13 +70,12 @@ h3 {
 }
 
 .card-img {
-  max-width: 180px;
+  max-width: 100%;
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .card {
   background-color: transparent;
-  height: 250px;
   margin: 2px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
