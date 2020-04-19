@@ -24,5 +24,9 @@ export default {
   color: #2c3e50;
   margin: 0px;
   padding: 0px;
+  background: url("/bg_wood.jpg");
+}
+body {
+  margin: 0;
 }
 </style>

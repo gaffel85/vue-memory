@@ -72,6 +72,7 @@ h3 {
 .card {
   background-color: transparent;
   height: 250px;
+  margin: 2px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -107,7 +108,7 @@ h3 {
 
 /* Style the front side (fallback if image is missing) */
 .card-front {
-  background: #707eb1;
+  background: url("/bg_card.png");
   color: black;
 }
 

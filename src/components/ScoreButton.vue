@@ -30,6 +30,7 @@ export default {
 h3.button {
   border: 3px solid #224542;
   padding: 10px;
+  margin: 2px;
   background: #90e5eb;
 }
 </style>

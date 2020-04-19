@@ -2,39 +2,21 @@
   <div>
     <Settings :gameState="gameState" />
     <div class="controlls">
-      <TakeButton :gameState="gameState" />
       <SizeButton :gameState="gameState" v-bind:inc="true" />
       <SizeButton :gameState="gameState" v-bind:inc="false" />
-      <ScoreButton
-        :gameState="gameState"
-        userName="Ola"
-        userId="1"
-        class="scorButton"
-        v-bind:class="[namesHidden ? 'hidden' : '']"
-      />
-      <ScoreButton
-        :gameState="gameState"
-        userName="Julia"
-        userId="2"
-        class="scorButton"
-        v-bind:class="[namesHidden ? 'hidden' : '']"
-      />
-      <ScoreButton
-        :gameState="gameState"
-        userName="Hans"
-        userId="3"
-        class="scorButton"
-        v-bind:class="[namesHidden ? 'hidden' : '']"
-      />
-      <ScoreButton
-        :gameState="gameState"
-        userName="Ingeborg"
-        userId="4"
-        class="scorButton"
-        v-bind:class="[namesHidden ? 'hidden' : '']"
-      />
     </div>
     <div class="table">
+      <div class="scoreTab" v-bind:class="[namesHidden ? 'hidden' : '']">
+        <TakeButton :gameState="gameState" />
+        <div class="scoreRow">
+          <ScoreButton :gameState="gameState" userName="Ola" userId="1" />
+          <ScoreButton :gameState="gameState" userName="Julia" userId="2" />
+        </div>
+        <div div class="scoreRow">
+          <ScoreButton :gameState="gameState" userName="Hans" userId="3" />
+          <ScoreButton :gameState="gameState" userName="Ingeborg" userId="4" />
+        </div>
+      </div>
       <Card
         v-for="item in items"
         :key="item.key"
@@ -56,16 +38,7 @@ import Settings from "./Settings.vue";
 import { GameState } from "../game/state";
 const { shuffle, RndGen } = require("../fn/shuffle").default;
 
-// const uri = window.location.search.substring(1);
-// const params = new URLSearchParams(uri);
-/* const seed = params.get("seed");
-const screen = params.get("screen");
-const totalScreens = params.get("of");*/
-// const memory = params.get("memory");
-
 const gameState = new GameState();
-
-const namesHidden = screen ? screen != 1 : false;
 
 export default {
   name: "app",
@@ -74,7 +47,7 @@ export default {
       totalItems: [],
       items: [],
       gameState,
-      namesHidden: namesHidden
+      namesHidden: true
     };
   },
   components: {
@@ -138,6 +111,8 @@ export default {
       console.log("Sliced");
       console.log(cardsForThisPage);
       this.items = cardsForThisPage;
+
+      this.namesHidden = screen ? screen != 1 : false;
     });
   }
 };
@@ -145,7 +120,6 @@ export default {
 
 <style>
 .table {
-  background: #eeff99;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -158,13 +132,15 @@ export default {
 .controlls {
   background: #badac4;
   padding: 2px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: auto;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1000;
 }
-.scorButton.hidden {
-  visibility: hidden;
+.scoreTab.hidden {
+  display: none;
+}
+.scoreRow {
+  float: left;
 }
 </style>

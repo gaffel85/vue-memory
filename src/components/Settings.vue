@@ -22,6 +22,13 @@
 </template>
 
 <script>
+const uri = window.location.search.substring(1);
+const params = new URLSearchParams(uri);
+const seed = params.get("seed");
+const screen = params.get("screen");
+const totalScreens = params.get("of");
+const memory = params.get("memory");
+
 export default {
   name: "Settings",
   props: {
@@ -32,10 +39,10 @@ export default {
       screen: 1,
       totalScreens: 3,
       isHidden: false,
-      seed: "" + Math.round(Math.random() * 10000),
-      screenNumber: "",
-      screenTotal: "",
-      memorySet: "letters"
+      seed: seed ? seed : "" + Math.round(Math.random() * 10000),
+      screenNumber: screen ? screen : "",
+      screenTotal: totalScreens ? totalScreens : "",
+      memorySet: memory ? memory : "letters"
     };
   },
 
