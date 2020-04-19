@@ -1,6 +1,37 @@
 [
   {
     "title": "Bäver",
-    "pairs": [{ "img": "svenska-djur/baver.png" }]
+    "pairs": [
+      { "img": "svenska-djur/baver.png" },
+      { "img": "svenska-djur/baver2.png" }
+    ]
+  },
+  {
+    "title": "Näbbmus",
+    "pairs": [
+      { "img": "svenska-djur/nabbmus1.png" },
+      { "img": "svenska-djur/nabbmus2.png" }
+    ]
+  },
+  {
+    "title": "Sork",
+    "pairs": [
+      { "img": "svenska-djur/sork1.png" },
+      { "img": "svenska-djur/sork2.png" }
+    ]
+  },
+  {
+    "title": "Hare",
+    "pairs": [
+      { "img": "svenska-djur/hare1.png" },
+      { "img": "svenska-djur/hare2.png" }
+    ]
+  },
+  {
+    "title": "Lodjur",
+    "pairs": [
+      { "img": "svenska-djur/lodjur1.png" },
+      { "img": "svenska-djur/lodjur2.png" }
+    ]
   }
 ]
