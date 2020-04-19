@@ -6,8 +6,8 @@
       <SizeButton :gameState="gameState" v-bind:inc="false" />
     </div>
     <div class="table">
+      <TakeButton :gameState="gameState" />
       <div class="scoreTab" v-bind:class="[namesHidden ? 'hidden' : '']">
-        <TakeButton :gameState="gameState" />
         <div class="scoreRow">
           <ScoreButton :gameState="gameState" userName="Ola" userId="1" />
           <ScoreButton :gameState="gameState" userName="Julia" userId="2" />
