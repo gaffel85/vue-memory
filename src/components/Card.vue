@@ -112,7 +112,7 @@ h3 {
 
 /* Style the front side (fallback if image is missing) */
 .card-front {
-  background: url("/bg_card.png");
+  background: url("~@/assets/bg_card.png");
   color: black;
 }
 
