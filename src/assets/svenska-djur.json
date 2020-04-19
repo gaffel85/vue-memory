@@ -33,5 +33,40 @@
       { "img": "svenska-djur/lodjur1.png" },
       { "img": "svenska-djur/lodjur2.png" }
     ]
+  },
+  {
+    "title": "Trana",
+    "pairs": [
+      { "img": "svenska-djur/trana1.png" },
+      { "img": "svenska-djur/trana2.png" }
+    ]
+  },
+  {
+    "title": "Grävling",
+    "pairs": [
+      { "img": "svenska-djur/gravling1.png" },
+      { "img": "svenska-djur/gravling2.png" }
+    ]
+  },
+  {
+    "title": "Rådjur",
+    "pairs": [
+      { "img": "svenska-djur/radjur_hona.png", "subtitle": "Hona" },
+      { "img": "svenska-djur/radjur_hane.png", "subtitle": "Hane" }
+    ]
+  },
+  {
+    "title": "Dovhjort",
+    "pairs": [
+      { "img": "svenska-djur/dovhjort_hona.png", "subtitle": "Hona" },
+      { "img": "svenska-djur/dovhjort_hane.png", "subtitle": "Hane" }
+    ]
+  },
+  {
+    "title": "Snok",
+    "pairs": [
+      { "img": "svenska-djur/snok1.png" },
+      { "img": "svenska-djur/snok2.png" }
+    ]
   }
 ]

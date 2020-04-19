@@ -42,7 +42,7 @@ export default {
       seed: seed ? seed : "" + Math.round(Math.random() * 10000),
       screenNumber: screen ? screen : "",
       screenTotal: totalScreens ? totalScreens : "",
-      memorySet: memory ? memory : "letters"
+      memorySet: memory ? memory : "svenska-djur"
     };
   },
 

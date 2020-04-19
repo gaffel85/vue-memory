@@ -62,7 +62,11 @@ export default {
 
 <style>
 h3 {
-  margin-bottom: 5%;
+  margin: 5px 0px 0px 0px;
+}
+
+h4 {
+  margin: 0px 0px 0px 0px;
 }
 
 .bigSub {
