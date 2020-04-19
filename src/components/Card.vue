@@ -8,7 +8,7 @@
       <div class="card-front"></div>
       <div class="card-back">
         <h3>{{ title }}</h3>
-        <h4>{{ subtitle }}</h4>
+        <h4 v-bind:class="[noImg ? 'bigSub' : '']">{{ subtitle }}</h4>
         <img :src="pic" class="card-img" />
       </div>
     </div>
@@ -29,7 +29,8 @@ export default {
       isOpen: false,
       isHidden: false,
       cardWidth: 200,
-      cardHeight: 250
+      cardHeight: 250,
+      noImg: !this.pic
     };
   },
 
@@ -62,6 +63,10 @@ export default {
 <style>
 h3 {
   margin-bottom: 5%;
+}
+
+.bigSub {
+  font-size: 50pt;
 }
 
 .card-img {
